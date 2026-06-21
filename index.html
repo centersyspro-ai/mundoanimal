@@ -3,891 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Animal | Veterinaria en León - Cuidado Integral para Mascotas</title>
-    <meta name="description" content="Veterinaria Mundo Animal en León. Servicios: guardería, cirugías, vacunas, peluquería. Productos para mascotas. Desde 1999 cuidando de tus amigos peludos.">
-    
-    <!-- Meta redes sociales -->
-    <meta property="og:title" content="Mundo Animal | Veterinaria Especializada">
-    <meta property="og:description" content="Cuidado integral para perros y gatos. Servicios veterinarios, guardería y productos de calidad.">
-    <meta property="og:image" content="assets/images/hero.png">
-    
-    <!-- Fuente Lato -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #FFFFFF;
-            --secondary: #F9B872;
-            --accent: #FAE7A5;
-            --blue: #B6E1E7;
-            --text: #333333;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Lato', sans-serif;
-        }
-
-        body {
-            background-color: var(--primary);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Header */
-        .header {
-            background: var(--primary);
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo img {
-            width: 140px;
-            height: 50px;
-            transition: var(--transition);
-        }
-
-        .logo img:hover {
-            transform: scale(1.05);
-        }
-
-        .nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav a:hover {
-            color: var(--secondary);
-        }
-
-        .nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            transition: var(--transition);
-        }
-
-        .nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('assets/images/hero.png');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            margin-top: 80px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--accent);
-            color: var(--text);
-            transform: translateY(-3px);
-        }
-
-        /* Sections General */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--text);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--secondary);
-        }
-
-        /* About Section */
-        .about {
-            background: var(--blue);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .vet-info {
-            background: var(--primary);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        .about-image {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .about-image:hover {
-            transform: translateY(-10px);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: var(--primary);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--secondary);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2rem;
-        }
-
-        /* Products Section */
-        .products {
-            background: var(--blue);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .product-card {
-            background: var(--primary);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .product-image {
-            height: 200px;
-            background: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: var(--primary);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .testimonial-content {
-            font-style: italic;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .testimonial-content::before {
-            content: '"';
-            font-size: 60px;
-            color: var(--secondary);
-            opacity: 0.3;
-            position: absolute;
-            top: -20px;
-            left: -10px;
-        }
-
-        /* Gallery */
-        .gallery {
-            background: var(--accent);
-        }
-
-        .carousel {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        .carousel-inner {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            height: 400px;
-            background: var(--blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--text);
-        }
-
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            padding: 0 20px;
-        }
-
-        .carousel-btn {
-            background: rgba(255,255,255,0.8);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .carousel-btn:hover {
-            background: var(--secondary);
-            color: white;
-        }
-
-        /* Map Section */
-        .map-container {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-top: 30px;
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            z-index: 1000;
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-            background: #128C7E;
-        }
-
-        .whatsapp-btn svg {
-            width: 30px;
-            height: 30px;
-            fill: white;
-        }
-
-        /* Popup */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .popup {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            transform: translateY(50px);
-            transition: var(--transition);
-        }
-
-        .popup-overlay.active .popup {
-            transform: translateY(0);
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--text);
-            color: white;
-            padding: 50px 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer h3 {
-            color: var(--secondary);
-            margin-bottom: 20px;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--secondary);
-            padding-left: 5px;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .carousel-item {
-    min-width: 100%;
-    height: 500px;
-    position: relative;
-}
-
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .carousel-item {
-        height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .carousel-item {
-        height: 250px;
-    }
-}
-
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <title>Dragón Dorado - Restaurante Chino</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="assets/images/logo.jpg" alt="Mundo Animal Veterinaria">
-            </div>
-            <nav class="nav">
-                <ul>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="assets/images/logo-dragon.jpg" alt="Dragón Dorado Logo">
+                    <span>Dragón Dorado</span>
+                </div>
+                <ul class="nav-menu">
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#productos">Productos</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#horarios">Horarios</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
-            </nav>
-        </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <h1>Mundo Animal</h1>
-            <p>Cuidando a tus mascotas desde 1999</p>
-            <a href="#servicios" class="btn">Nuestros Servicios</a>
+            <h1>Auténtica Cocina China</h1>
+            <p>Sabores tradicionales con ingredientes frescos y de la más alta calidad</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">Ver Menú</a>
+                <a href="https://wa.me/524613444540" class="btn btn-secondary" target="_blank">
+                    <img src="assets/images/whatsapp_logo_icon.png" alt="WhatsApp">
+                    Solicitar Servicio
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="nosotros" class="section about">
+    <section id="nosotros" class="about">
         <div class="container">
-            <h2 class="section-title">Sobre Nosotros</h2>
+            <h2 class="section-title">Nuestra Historia</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>25 Años de Experiencia</h3>
-                    <p>En Mundo Animal nos dedicamos al cuidado integral de perros y gatos. Contamos con tecnología de rayos X para diagnósticos precisos, servicios de cirugía, guardería y todo lo que tu mascota necesita.</p>
-                    <p>Nuestro compromiso es brindar la mejor atención con amor y profesionalismo.</p>
-                    <div class="vet-info">
-                        <h4>MVZ Efrén Castellanos</h4>
-                        <p>Médico Veterinario Zootecnista con más de 25 años de experiencia en el cuidado animal.</p>
-                    </div>
+                    <p>Desde 1995, el Restaurante Dragón Dorado ha sido un referente de la auténtica cocina china en la ciudad. Fundado por la familia Li, inmigrantes de la provincia de Sichuan, hemos mantenido vivas las recetas tradicionales transmitidas de generación en generación.</p>
+                    <p>Nuestro compromiso es ofrecer platillos que respetan las técnicas culinarias chinas, utilizando ingredientes frescos y de calidad. Cada plato cuenta una historia y refleja la riqueza cultural de nuestra tierra natal.</p>
+                    <p>En Dragón Dorado, no solo servimos comida, creamos experiencias que transportan a nuestros clientes directamente a los sabores auténticos de China.</p>
                 </div>
                 <div class="about-image">
-                    <!-- Imagen representativa de la veterinaria -->
-                    <div style="width:100%;height:300px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">
-                        <img src="assets/images/imagen-de-la-veterinaria1.jpg" alt="imagen de la veterinaria">
-                    </div>
+                    <img src="assets/images/restaurant-interior.webp" alt="Interior del Restaurante">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="servicios" class="section">
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
         <div class="container">
-            <h2 class="section-title">Nuestros Servicios</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🏥</div>
-                    <h3>Guardería</h3>
-                    <p>Cuidamos de tu mascota cuando no puedes estar con ella. Espacio seguro y divertido.</p>
+            <h2 class="section-title">Nuestro Menú</h2>
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="entradas">Entradas</button>
+                <button class="category-btn" data-category="platos-fuertes">Platos Fuertes</button>
+                <button class="category-btn" data-category="especialidades">Especialidades</button>
+                <button class="category-btn" data-category="postres">Postres</button>
+            </div>
+            
+            <div class="menu-items">
+                <!-- Entradas -->
+<div class="menu-category active" id="entradas">
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/rollitos-de-primavera.jpg" alt="Rollitos de Primavera">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Rollitos de Primavera</h3>
+                <span class="item-price">$85</span>
+            </div>
+            <p>Delicados rollitos rellenos de vegetales frescos y carne, fritos hasta obtener una textura crujiente.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/wonton-frito.jpg" alt="Wonton Frito">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Wonton Frito</h3>
+                <span class="item-price">$75</span>
+            </div>
+            <p>Empanadillas rellenas de cerdo y especias, acompañadas de salsa agridulce.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/sopa-wantan.webp" alt="Sopa Wantán">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Sopa Wantán</h3>
+                <span class="item-price">$90</span>
+            </div>
+            <p>Caldo de pollo tradicional con wantanes rellenos de cerdo y verduras.</p>
+        </div>
+    </div>
+</div>
+                
+                <!-- Platos Fuertes -->
+<div class="menu-category" id="platos-fuertes">
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/pollo-almendras.jpg" alt="Pollo con Almendras">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Pollo con Almendras</h3>
+                <span class="item-price">$150</span>
+            </div>
+            <p>Trozos de pollo salteados con almendras, pimientos y nuestra salsa especial.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/cerdo-agridulce.jpg" alt="Cerdo Agridulce">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Cerdo Agridulce</h3>
+                <span class="item-price">$160</span>
+            </div>
+            <p>Lomo de cerdo en cubos, frito y bañado en nuestra clásica salsa agridulce.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/res-brocoli.jpg" alt="Res con Brócoli">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Res con Brócoli</h3>
+                <span class="item-price">$170</span>
+            </div>
+            <p>Ternera tierna salteada con brócoli fresco en salsa de ostras.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/pato-naranja.jpg" alt="Pato a la Naranja">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Pato a la Naranja</h3>
+                <span class="item-price">$210</span>
+            </div>
+            <p>Pato lacado horneado con nuestra exclusiva salsa de naranja.</p>
+        </div>
+    </div>
+</div>
+                
+                <!-- Especialidades -->
+<div class="menu-category" id="especialidades">
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/pato-peking.jpg" alt="Pato Laqueado a la Peking">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Pato Laqueado a la Peking</h3>
+                <span class="item-price">$320</span>
+            </div>
+            <p>Nuestra especialidad insignia. Pato preparado según la receta tradicional de Beijing.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/hot-pot.jpg" alt="Hot Pot Familiar">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Hot Pot Familiar</h3>
+                <span class="item-price">$450</span>
+            </div>
+            <p>Caldo picante Sichuan con selección de carnes, mariscos y verduras para cocinar en la mesa.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/langosta-ajo.jpg" alt="Langosta con Salsa de Ajo">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Langosta con Salsa de Ajo</h3>
+                <span class="item-price">$380</span>
+            </div>
+            <p>Langosta fresca salteada con ajo, jengibre y cebollín.</p>
+        </div>
+    </div>
+</div>
+                
+                <!-- Postres -->
+<div class="menu-category" id="postres">
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/banana-frita.jpg" alt="Banana Frita">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Banana Frita</h3>
+                <span class="item-price">$80</span>
+            </div>
+            <p>Plátano rebozado y frito, servido con helado de vainilla y miel.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/albondigas-sesamo.jpg" alt="Albóndigas de Sésamo">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Albóndigas de Sésamo</h3>
+                <span class="item-price">$70</span>
+            </div>
+            <p>Deliciosas bolas de masa rellenas de pasta de frijol dulce, cubiertas de sésamo.</p>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="item-image">
+            <img src="assets/images/gelatina-coco.jpg" alt="Gelatina de Coco">
+        </div>
+        <div class="item-content">
+            <div class="item-header">
+                <h3>Gelatina de Coco</h3>
+                <span class="item-price">$65</span>
+            </div>
+            <p>Postre refrescante de gelatina de coco con trozos de fruta.</p>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horarios Section -->
+    <section id="horarios" class="hours">
+        <div class="container">
+            <h2 class="section-title">Horarios de Atención</h2>
+            <div class="hours-content">
+                <div class="hours-info">
+                    <div class="hours-item">
+                        <span class="day">Lunes - Jueves</span>
+                        <span class="time">11:00 AM - 10:00 PM</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Viernes - Sábado</span>
+                        <span class="time">11:00 AM - 11:00 PM</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Domingo</span>
+                        <span class="time">12:00 PM - 9:00 PM</span>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🔪</div>
-                    <h3>Cirugías</h3>
-                    <p>Procedimientos quirúrgicos con los más altos estándares de seguridad y cuidado.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚿</div>
-                    <h3>Baño y Spa</h3>
-                    <p>Servicios de baño, corte de uñas y cuidado estético para tu mascota.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💉</div>
-                    <h3>Vacunas</h3>
-                    <p>Esquema completo de vacunación para mantener a tu mascota saludable.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">✂️</div>
-                    <h3>Peluquería</h3>
-                    <p>Cortes de pelo profesionales y estilizados para todas las razas.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📷</div>
-                    <h3>Rayos X</h3>
-                    <p>Diagnóstico por imagen para detectar lesiones y problemas óseos.</p>
+                <div class="hours-image">
+                    <img src="assets/images/restaurant-exterior.jpg" alt="Exterior del Restaurante">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="productos" class="section products">
-        <div class="container">
-            <h2 class="section-title">Nuestros Productos</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="assets/images/jabon-antipulgas.jpg" alt="Jabón Antipulgas">
-                    <div class="product-info">
-                        <h3>Jabones Antipulgas</h3>
-                        <p>Elimina pulgas y garrapatas eficazmente.</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="assets/images/shampoo-perros.jpg" alt="Shampoo para perros">
-                    <div class="product-info">
-                        <h3>Shampoos Especiales</h3>
-                        <p>Para diferentes tipos de pelaje y necesidades.</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="assets/images/correas-cadenas.jpg" alt="correas para perros">
-                    <div class="product-info">
-                        <h3>Correas y Cadenas</h3>
-                        <p>Materiales resistentes y cómodos.</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="assets/images/cama-perro.jpg" alt="camas para perros">
-                    <div class="product-info">
-                        <h3>Camas para Perros</h3>
-                        <p>Confort y descanso para tu compañero.</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="assets/images/spray-antipulgas.jpg" alt="Spray antipulgas">
-                    <div class="product-info">
-                        <h3>Spray Antipulgas</h3>
-                        <p>Protección rápida y efectiva.</p>
-                    </div>  
-                </div>
-                <div class="product-card">
-                    <img src="assets/images/cepillo-perros.jpg" alt="cepillo para perros">
-                    <div class="product-info">
-                        <h3>Cepillos para Pelaje</h3>
-                        <p>Mantén el pelaje de tu mascota impecable.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonios" class="section">
-        <div class="container">
-            <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>Excelente servicio! Llevo a mi perro Rocky desde hace 3 años y siempre recibe la mejor atención.</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <h4>María González</h4>
-                        <span>Dueña de Rocky</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>La guardería es increíble! Mi gato Simba siempre vuelve contento y bien cuidado.</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <h4>Carlos Rodríguez</h4>
-                        <span>Dueño de Simba</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>El Dr. Castellanos es muy profesional. Operó a mi perrita y todo salió perfecto.</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <h4>Ana Martínez</h4>
-                        <span>Dueña de Luna</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="galeria" class="section gallery">
-        <div class="container">
-            <h2 class="section-title">Nuestra Galería</h2>
-            <div class="carousel">
-                <div class="carousel-inner">
-                   <div class="carousel-item">
-                      <img src="assets/images/gallery/galeria-1.jpg" alt="veterinaria Mundo Animal" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                       <img src="assets/images/gallery/galeria-2.jpg" alt="Mascotas felices en nuestra veterinaria" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                       <img src="assets/images/gallery/galeria-3.jpg" alt="veterinaria Mundo Animal" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="assets/images/gallery/galeria-4.jpg" alt="veterinaria Mundo Animal" loading="lazy">
-                    </div>
-                </div>
-                <div class="carousel-controls">
-                   <button class="carousel-btn prev">‹</button>
-                   <button class="carousel-btn next">›</button>
-                </div>
-            </div>
-        </div>
-    </section>
- 
     <!-- Contact Section -->
-    <section id="contacto" class="section">
+    <section id="contacto" class="contact">
         <div class="container">
-            <h2 class="section-title">Visítanos</h2>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119104.15127941828!2d-101.8741946566406!3d21.11237769999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bc05fe41dffe1%3A0xb721448cbfc54046!2sVeterinaria%20Salud%20Animal!5e0!3m2!1ses!2smx!4v1764120733858!5m2!1ses!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <h2 class="section-title">Contáctanos</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Dirección</h3>
+                        <p>Av. Principal #123, Colonia Centro</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Teléfono</h3>
+                        <p>+52 461 344 4540</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Correo Electrónico</h3>
+                        <p>info@dragondorado.com</p>
+                    </div>
+                </div>
+                <div class="whatsapp-cta">
+                    <h3>¿Listo para ordenar?</h3>
+                    <p>Haz tu pedido directamente por WhatsApp</p>
+                    <a href="https://wa.me/524613444540" class="btn-whatsapp" target="_blank">
+                        <img src="assets/images/whatsapp_logo_icon.png" alt="WhatsApp">
+                        Solicitar Servicio
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-info">
-                    <h3>Mundo Animal</h3>
-                    <p>Mariano Escobedo pte. 6215, León, Gto.</p>
-                    <p>Tel: +52 442 999 9999</p>
-                    <p>Email: info@mundoanimal.com</p>
+                <div class="footer-logo">
+                    <img src="assets/images/logo-dragon.jpg" alt="Dragón Dorado Logo">
+                    <span>Dragón Dorado</span>
                 </div>
                 <div class="footer-links">
-                    <h3>Enlaces Rápidos</h3>
-                    <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#nosotros">Nosotros</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
-                        <li><a href="#productos">Productos</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#menu">Menú</a>
+                    <a href="#horarios">Horarios</a>
+                    <a href="#contacto">Contacto</a>
                 </div>
-                <div class="footer-hours">
-                    <h3>Horarios</h3>
-                    <p>Lunes a Viernes: 8:00 AM - 8:00 PM</p>
-                    <p>Sábados: 9:00 AM - 6:00 PM</p>
-                    <p>Domingos: 10:00 AM - 2:00 PM</p>
+                <div class="footer-social">
+                    <p>Síguenos en redes sociales</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="assets/images/logo-facebook.png" alt="Facebook"></a>
+                        <a href="#"><img src="assets/images/logo-pinterest.png" alt="Pinterest"></a>
+                        <a href="#"><img src="assets/images/logo-instagram.png" alt="Instagram"></a>
+                    </div>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Dragón Dorado. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/524429999999" class="whatsapp-btn" target="_blank" aria-label="Contactar por WhatsApp">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.189-1.248-6.189-3.515-8.444"/>
-        </svg>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/524429999999" class="floating-whatsapp" target="_blank">
+        <img src="assets/images/whatsapp_logo_icon.png" alt="WhatsApp">
     </a>
 
-    <!-- Popup -->
-    <div class="popup-overlay" id="popupOverlay">
-        <div class="popup">
-            <button class="popup-close" id="popupClose">&times;</button>
-            <div class="popup-content">
-                <h3>¡Promoción Especial!</h3>
-                <p>Este mes tenemos descuentos en:</p>
-                <ul>
-                    <li>20% en baño y peluquería</li>
-                    <li>Vacunación package con 15% off</li>
-                    <li>Guardería 3x2 en fines de semana</li>
-                </ul>
-                <p>¡Aprovecha estas ofertas!</p>
-                <a href="https://wa.me/524429999999" class="btn" target="_blank">Solicitar Promoción</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Carrusel
-        document.addEventListener('DOMContentLoaded', function() {
-            const carouselInner = document.querySelector('.carousel-inner');
-            const carouselItems = document.querySelectorAll('.carousel-item');
-            const prevBtn = document.querySelector('.carousel-btn.prev');
-            const nextBtn = document.querySelector('.carousel-btn.next');
-            let currentIndex = 0;
-
-            function updateCarousel() {
-                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-
-            nextBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex + 1) % carouselItems.length;
-                updateCarousel();
-            });
-
-            prevBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-                updateCarousel();
-            });
-
-            // Popup
-            const popupOverlay = document.getElementById('popupOverlay');
-            const popupClose = document.getElementById('popupClose');
-
-            setTimeout(function() {
-                popupOverlay.classList.add('active');
-            }, 10000);
-
-            popupClose.addEventListener('click', function() {
-                popupOverlay.classList.remove('active');
-            });
-
-            popupOverlay.addEventListener('click', function(e) {
-                if (e.target === popupOverlay) {
-                    popupOverlay.classList.remove('active');
-                }
-            });
-
-            // Smooth scroll para navegación
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
