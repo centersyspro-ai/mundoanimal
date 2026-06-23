@@ -636,7 +636,7 @@
         </div>
     </section>
 
-    <!-- Google Calendar Booking Section -->
+   <!-- Google Calendar Booking Section -->
 <section id="citas" class="section" style="background: #fdfdfd; padding: 60px 0;">
     <div class="container">
         <div style="text-align: center; margin-bottom: 40px;">
@@ -644,14 +644,24 @@
             <p style="color: #666666; font-size: 16px; margin-top: -20px;">Selecciona el día y horario disponible para atender a tu peludo.</p>
         </div>
         
-        <!-- CONTENEDOR OPTIMIZADO PARA MÓVILES -->
-        <div style="max-width: 850px; margin: 0 auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); -webkit-overflow-scrolling: touch;">
+        <div style="text-align: center; margin-top: 20px;">
+            <!-- CÓDIGO OFICIAL DE BOTÓN EMERGENTE DE GOOGLE -->
             <!-- Google Calendar Appointment Scheduling begin -->
-            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Dcn9Po8pScPnq1MbqDa4cGYRegFbeA9WdS71_X4bb0NHUbKucwgjuzVvQWXiIfYv3dG0LtX71?gv=true" 
-                    style="border: 0; width: 100%; min-width: 100%; max-width: 100%;" 
-                    height="650" 
-                    frameborder="0">
-            </iframe>
+            <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+            <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+            <script>
+            (function() {
+              var target = document.currentScript;
+              window.addEventListener('load', function() {
+                calendar.schedulingButton.load({
+                  url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Dcn9Po8pScPnq1MbqDa4cGYRegFbeA9WdS71_X4bb0NHUbKucwgjuzVvQWXiIfYv3dG0LtX71?gv=true',
+                  color: '#F9B872', /* Usamos tu color secundario de Mundo Animal */
+                  label: 'Reservar una cita',
+                  target,
+                });
+              });
+            })();
+            </script>
             <!-- end Google Calendar Appointment Scheduling -->
         </div>
     </div>
