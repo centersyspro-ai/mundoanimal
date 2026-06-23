@@ -637,26 +637,25 @@
     </section>
 
     <!-- Google Calendar Booking Section -->
-    <section id="citas" class="section" style="background: #fdfdfd;">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 class="section-title">Agenda tu Cita</h2>
-                <p style="color: #666666; font-size: 16px; margin-top: -20px;">Selecciona el día y horario disponible para atender a tu peludo.</p>
-            </div>
-            
-            <!-- Contenedor del Iframe de Google Calendar -->
-            <div style="max-width: 850px; margin: 0 auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);">
-                <!-- Google Calendar Appointment Scheduling begin -->
-                <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Dcn9Po8pScPnq1MbqDa4cGYRegFbeA9WdS71_X4bb0NHUbKucwgjuzVvQWXiIfYv3dG0LtX71?gv=true" 
-                        style="border: 0;" 
-                        width="100%" 
-                        height="600" 
-                        frameborder="0">
-                </iframe>
-                <!-- end Google Calendar Appointment Scheduling -->
-            </div>
+<section id="citas" class="section" style="background: #fdfdfd; padding: 60px 0;">
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 class="section-title">Agenda tu Cita</h2>
+            <p style="color: #666666; font-size: 16px; margin-top: -20px;">Selecciona el día y horario disponible para atender a tu peludo.</p>
         </div>
-    </section>
+        
+        <!-- CONTENEDOR OPTIMIZADO PARA MÓVILES -->
+        <div style="max-width: 850px; margin: 0 auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); -webkit-overflow-scrolling: touch;">
+            <!-- Google Calendar Appointment Scheduling begin -->
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Dcn9Po8pScPnq1MbqDa4cGYRegFbeA9WdS71_X4bb0NHUbKucwgjuzVvQWXiIfYv3dG0LtX71?gv=true" 
+                    style="border: 0; width: 100%; min-width: 100%; max-width: 100%;" 
+                    height="650" 
+                    frameborder="0">
+            </iframe>
+            <!-- end Google Calendar Appointment Scheduling -->
+        </div>
+    </div>
+</section>
     
 
     <!-- Products Section -->
