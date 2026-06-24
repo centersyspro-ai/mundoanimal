@@ -105,19 +105,21 @@
             width: 100%;
         }
 
-        /* Hero Section */
+        /* Hero Section - Altura elástica corregida */
         .hero {
-            height: 100vh;
+            min-height: 85vh;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                         url('assets/images/hero.png');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             margin-top: 80px;
+            padding: 40px 0;
         }
 
         .hero-content h1 {
@@ -211,9 +213,11 @@
             transform: translateY(-10px);
         }
 
+        /* Protección para que la foto de la veterinaria no se estire */
         .about-image img {
             width: 100%;
-            height: auto;
+            height: 320px;
+            object-fit: cover;
             display: block;
         }
 
@@ -276,13 +280,13 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        .product-image {
-            height: 200px;
+        /* Arreglo definitivo para las imágenes de los productos */
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
             background: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
         }
 
         .product-info {
@@ -345,13 +349,15 @@
 
         .carousel-item {
             min-width: 100%;
-            height: 400px;
-            background: var(--blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--text);
+            height: 500px;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .carousel-controls {
@@ -378,6 +384,15 @@
         .carousel-btn:hover {
             background: var(--secondary);
             color: white;
+        }
+
+        /* Reglas para alternar botones del calendario (PC vs Móvil) */
+        .only-pc { display: none !important; }
+        .only-mobile { display: block !important; }
+
+        @media (min-width: 769px) {
+            .only-pc { display: block !important; }
+            .only-mobile { display: none !important; }
         }
 
         /* Map Section */
@@ -514,37 +529,15 @@
                 transform: translateY(0);
             }
         }
-        .carousel-item {
-    min-width: 100%;
-    height: 500px;
-    position: relative;
-}
 
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .carousel-item {
-        height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .carousel-item {
-        height: 250px;
-    }
-}
-
-
-        /* Responsive */
+        /* Responsive Global */
         @media (max-width: 768px) {
             .nav {
                 display: none;
+            }
+
+            .hero {
+                min-height: 60vh;
             }
 
             .hero-content h1 {
@@ -553,10 +546,21 @@
 
             .about-content {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
 
             .section-title {
                 font-size: 2rem;
+            }
+
+            .carousel-item {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                height: 250px;
             }
         }
     </style>
@@ -574,6 +578,7 @@
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#productos">Productos</a></li>
+                    <li><a href="#citas">Citas</a></li>
                     <li><a href="#testimonios">Testimonios</a></li>
                     <li><a href="#galeria">Galería</a></li>
                     <li><a href="#contacto">Contacto</a></li>
@@ -587,7 +592,7 @@
         <div class="hero-content">
             <h1>Mundo Animal</h1>
             <p>Cuidando a tus mascotas desde 1999</p>
-            <a href="#servicios" class="btn">Nuestros Servicios</a>
+            <a href="#citas" class="btn">Agendar una Cita</a>
         </div>
     </section>
 
@@ -606,10 +611,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <!-- Imagen representativa de la veterinaria -->
-                    <div style="width:100%;height:300px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">
-                        <img src="assets/images/imagen-de-la-veterinaria1.jpg" alt="imagen de la veterinaria">
-                    </div>
+                    <img src="assets/images/imagen-de-la-veterinaria1.jpg" alt="imagen de la veterinaria">
                 </div>
             </div>
         </div>
@@ -705,6 +707,51 @@
         </div>
     </section>
 
+    <!-- Google Calendar Booking Section (Nueva ubicación Limpia y Ordenada) -->
+    <section id="citas" class="section" style="background: #fdfdfd;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Agenda tu Cita</h2>
+                <p style="color: #666666; font-size: 16px; margin-top: -20px;">Selecciona el día y horario disponible para atender a tu peludo.</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                
+                <!-- COMPORTAMIENTO PC: Carga la ventana emergente elegante -->
+                <div class="only-pc">
+                    <!-- Google Calendar Appointment Scheduling begin -->
+                    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+                    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Dcn9Po8pScPnq1MbqDa4cGYRegFbeA9WdS71_X4bb0NHUbKucwgjuzVvQWXiIfYv3dG0LtX71?gv=true',
+                          color: '#F9B872',
+                          label: 'Programar una cita',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
+                    <!-- end Google Calendar Appointment Scheduling -->
+                </div>
+
+                <!-- COMPORTAMIENTO MÓVIL: Evita que se rompa el diseño y manda a pantalla completa fluida -->
+                <div class="only-mobile">
+                    <a href="https://calendar.app.google/rDDVrwUkSXm9sc2b7" 
+                       target="_blank" 
+                       class="btn"
+                       style="display: inline-block; padding: 15px 35px; font-size: 16px; font-weight: bold; border-radius: 25px; box-shadow: 0 4px 14px rgba(249, 184, 114, 0.4); text-decoration: none; background: var(--secondary); color: white;">
+                        📅 Programar una cita
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Testimonials Section -->
     <section id="testimonios" class="section">
         <div class="container">
@@ -740,29 +787,6 @@
             </div>
         </div>
     </section>
-
-
-<!-- Google Calendar Appointment Scheduling begin -->
-<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-<script>
-(function() {
-  var target = document.currentScript;
-  window.addEventListener('load', function() {
-    calendar.schedulingButton.load({
-      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Dcn9Po8pScPnq1MbqDa4cGYRegFbeA9WdS71_X4bb0NHUbKucwgjuzVvQWXiIfYv3dG0LtX71?gv=true',
-      color: '#039BE5',
-      label: 'Programar una cita',
-      target,
-    });
-  });
-})();
-</script>
-<!-- end Google Calendar Appointment Scheduling -->
-
-
-
-
 
     <!-- Gallery Section -->
     <section id="galeria" class="section gallery">
