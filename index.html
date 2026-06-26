@@ -24,8 +24,6 @@
     <!-- Fuente Lato -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     
-    <!-- El resto de tus estilos CSS se mantiene exactamente igual... -->
-    
     <style>
         :root {
             --primary: #FFFFFF;
@@ -117,7 +115,7 @@
             width: 100%;
         }
 
-        /* Hero Section - Altura elástica corregida */
+        /* Hero Section */
         .hero {
             min-height: 85vh;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
@@ -225,7 +223,6 @@
             transform: translateY(-10px);
         }
 
-        /* Protección para que la foto de la veterinaria no se estire */
         .about-image img {
             width: 100%;
             height: 320px;
@@ -292,7 +289,6 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        /* Arreglo definitivo para las imágenes de los productos */
         .product-card img {
             width: 100%;
             height: 220px;
@@ -398,7 +394,6 @@
             color: white;
         }
 
-        /* Reglas para alternar botones del calendario (PC vs Móvil) */
         .only-pc { display: none !important; }
         .only-mobile { display: block !important; }
 
@@ -530,7 +525,6 @@
             padding-left: 5px;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -542,42 +536,26 @@
             }
         }
 
-        /* Responsive Global */
         @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-
-            .hero {
-                min-height: 60vh;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .carousel-item {
-                height: 300px;
-            }
+            .nav { display: none; }
+            .hero { min-height: 60vh; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-content { grid-template-columns: 1fr; gap: 30px; }
+            .section-title { font-size: 2rem; }
+            .carousel-item { height: 300px; }
         }
 
         @media (max-width: 480px) {
-            .carousel-item {
-                height: 250px;
-            }
+            .carousel-item { height: 250px; }
         }
     </style>
 </head>
 <body>
+    <!-- BOTÓN PERSONALIZADO PARA INSTALAR PWA -->
+    <button id="btnInstalar" style="display: none; position: fixed; top: 90px; right: 20px; z-index: 999; background: #F9B872; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; box-shadow: var(--shadow); cursor: pointer; transition: all 0.3s ease;">
+        📲 Instalar App
+    </button>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -719,7 +697,7 @@
         </div>
     </section>
 
-    <!-- Google Calendar Booking Section (Nueva ubicación Limpia y Ordenada) -->
+    <!-- Google Calendar Booking Section -->
     <section id="citas" class="section" style="background: #fdfdfd;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 40px;">
@@ -728,10 +706,7 @@
             </div>
             
             <div style="text-align: center; margin-top: 20px;">
-                
-                <!-- COMPORTAMIENTO PC: Carga la ventana emergente elegante -->
                 <div class="only-pc">
-                    <!-- Google Calendar Appointment Scheduling begin -->
                     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
                     <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
                     <script>
@@ -747,10 +722,8 @@
                       });
                     })();
                     </script>
-                    <!-- end Google Calendar Appointment Scheduling -->
                 </div>
 
-                <!-- COMPORTAMIENTO MÓVIL: Evita que se rompa el diseño y manda a pantalla completa fluida -->
                 <div class="only-mobile">
                     <a href="https://calendar.app.google/rDDVrwUkSXm9sc2b7" 
                        target="_blank" 
@@ -759,7 +732,6 @@
                         📅 Programar una cita
                     </a>
                 </div>
-
             </div>
         </div>
     </section>
@@ -892,9 +864,46 @@
         </div>
     </div>
 
+    <!-- SCRIPTS UNIFICADOS DE LA PÁGINA -->
     <script>
-        // Carrusel
+        // 1. Registro Integrado del Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker activo exitosamente:', reg.scope))
+                    .catch(err => console.error('Error al registrar el Service Worker:', err));
+            });
+        }
+
+        // 2. Lógica de Captura e Instalación Manual de la PWA
+        let deferredPrompt;
+        const btnInstalar = document.getElementById('btnInstalar');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            btnInstalar.style.display = 'block'; // Muestra el botón cuando la PWA esté lista
+        });
+
+        btnInstalar.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`Usuario eligió: ${outcome}`);
+                deferredPrompt = null;
+                btnInstalar.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            btnInstalar.style.display = 'none';
+            deferredPrompt = null;
+            console.log('¡Mundo Animal instalada con éxito!');
+        });
+
+        // 3. Controladores de la Interfaz (Carrusel, Popup inteligente y Smooth scroll)
         document.addEventListener('DOMContentLoaded', function() {
+            // Carrusel
             const carouselInner = document.querySelector('.carousel-inner');
             const carouselItems = document.querySelectorAll('.carousel-item');
             const prevBtn = document.querySelector('.carousel-btn.prev');
@@ -902,36 +911,45 @@
             let currentIndex = 0;
 
             function updateCarousel() {
-                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                if(carouselInner) {
+                    carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
             }
 
-            nextBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex + 1) % carouselItems.length;
-                updateCarousel();
-            });
+            if(nextBtn && prevBtn) {
+                nextBtn.addEventListener('click', function() {
+                    currentIndex = (currentIndex + 1) % carouselItems.length;
+                    updateCarousel();
+                });
 
-            prevBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-                updateCarousel();
-            });
+                prevBtn.addEventListener('click', function() {
+                    currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                    updateCarousel();
+                });
+            }
 
-            // Popup
+            // POPUP INTELIGENTE CON CONTROL DE SESIÓN (Evita repetición molesta)
             const popupOverlay = document.getElementById('popupOverlay');
             const popupClose = document.getElementById('popupClose');
 
-            setTimeout(function() {
-                popupOverlay.classList.add('active');
-            }, 10000);
+            if (popupOverlay && !sessionStorage.getItem('popupMostrado')) {
+                setTimeout(function() {
+                    popupOverlay.classList.add('active');
+                    sessionStorage.setItem('popupMostrado', 'true'); // Bloquea futuros popups esta sesión
+                }, 10000); // Aparece a los 10 segundos
+            }
 
-            popupClose.addEventListener('click', function() {
-                popupOverlay.classList.remove('active');
-            });
-
-            popupOverlay.addEventListener('click', function(e) {
-                if (e.target === popupOverlay) {
+            if(popupClose && popupOverlay) {
+                popupClose.addEventListener('click', function() {
                     popupOverlay.classList.remove('active');
-                }
-            });
+                });
+
+                popupOverlay.addEventListener('click', function(e) {
+                    if (e.target === popupOverlay) {
+                        popupOverlay.classList.remove('active');
+                    }
+                });
+            }
 
             // Smooth scroll para navegación
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -947,17 +965,6 @@
                 });
             });
         });
-    </script>
-
-    <!-- REGISTRO DEL SERVICE WORKER -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker activo exitosamente:', reg.scope))
-                    .catch(err => console.error('Error al registrar el Service Worker:', err));
-            });
-        }
     </script>
 </body>
 </html>
