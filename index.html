@@ -163,6 +163,31 @@
             transform: translateY(-3px);
         }
 
+        /* Botón de instalación personalizado flotante */
+        #btnInstalar {
+            display: none;
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 1001;
+            background: #F9B872;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        #btnInstalar:hover {
+            background: var(--accent);
+            color: var(--text);
+            transform: scale(1.05);
+        }
+
         /* Sections General */
         .section {
             padding: 80px 0;
@@ -394,6 +419,7 @@
             color: white;
         }
 
+        /* Reglas PC vs Móvil */
         .only-pc { display: none !important; }
         .only-mobile { display: block !important; }
 
@@ -525,6 +551,7 @@
             padding-left: 5px;
         }
 
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -536,25 +563,50 @@
             }
         }
 
+        /* Responsive Global */
         @media (max-width: 768px) {
-            .nav { display: none; }
-            .hero { min-height: 60vh; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .about-content { grid-template-columns: 1fr; gap: 30px; }
-            .section-title { font-size: 2rem; }
-            .carousel-item { height: 300px; }
+            .nav {
+                display: none;
+            }
+
+            .hero {
+                min-height: 60vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .carousel-item {
+                height: 300px;
+            }
+            
+            #btnInstalar {
+                top: auto;
+                bottom: 110px;
+                right: 20px;
+            }
         }
 
         @media (max-width: 480px) {
-            .carousel-item { height: 250px; }
+            .carousel-item {
+                height: 250px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- BOTÓN PERSONALIZADO PARA INSTALAR PWA -->
-    <button id="btnInstalar" style="display: none; position: fixed; top: 90px; right: 20px; z-index: 999; background: #F9B872; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; box-shadow: var(--shadow); cursor: pointer; transition: all 0.3s ease;">
-        📲 Instalar App
-    </button>
+    <!-- BOTÓN DE INSTALACIÓN PERSONALIZADO -->
+    <button id="btnInstalar">📲 Instalar App</button>
 
     <!-- Header -->
     <header class="header">
@@ -864,9 +916,9 @@
         </div>
     </div>
 
-    <!-- SCRIPTS UNIFICADOS DE LA PÁGINA -->
+    <!-- SCRIPT GLOBAL UNIFICADO -->
     <script>
-        // 1. Registro Integrado del Service Worker
+        // 1. REGISTRO DEL SERVICE WORKER
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
@@ -875,21 +927,24 @@
             });
         }
 
-        // 2. Lógica de Captura e Instalación Manual de la PWA
+        // 2. CAPTURAR EVENTO DE INSTALACIÓN PERSONALIZADO (A2HS)
         let deferredPrompt;
         const btnInstalar = document.getElementById('btnInstalar');
 
         window.addEventListener('beforeinstallprompt', (e) => {
+            // Evita que Chrome muestre su barra automática molesta
             e.preventDefault();
+            // Guarda el evento para detonarlo cuando den clic
             deferredPrompt = e;
-            btnInstalar.style.display = 'block'; // Muestra el botón cuando la PWA esté lista
+            // Despierta nuestro botón de instalación
+            btnInstalar.style.display = 'block';
         });
 
         btnInstalar.addEventListener('click', async () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-                console.log(`Usuario eligió: ${outcome}`);
+                console.log(`El usuario decidió instalar: ${outcome}`);
                 deferredPrompt = null;
                 btnInstalar.style.display = 'none';
             }
@@ -898,12 +953,12 @@
         window.addEventListener('appinstalled', () => {
             btnInstalar.style.display = 'none';
             deferredPrompt = null;
-            console.log('¡Mundo Animal instalada con éxito!');
+            console.log('¡Mundo Animal PWA instalada de forma local!');
         });
 
-        // 3. Controladores de la Interfaz (Carrusel, Popup inteligente y Smooth scroll)
+        // 3. LOGICA DE INTERFAZ (CARRUSEL, POPUP SEGURO Y SCROLL)
         document.addEventListener('DOMContentLoaded', function() {
-            // Carrusel
+            // Carrusel funcional
             const carouselInner = document.querySelector('.carousel-inner');
             const carouselItems = document.querySelectorAll('.carousel-item');
             const prevBtn = document.querySelector('.carousel-btn.prev');
@@ -911,47 +966,42 @@
             let currentIndex = 0;
 
             function updateCarousel() {
-                if(carouselInner) {
-                    carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
 
-            if(nextBtn && prevBtn) {
-                nextBtn.addEventListener('click', function() {
-                    currentIndex = (currentIndex + 1) % carouselItems.length;
-                    updateCarousel();
-                });
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            });
 
-                prevBtn.addEventListener('click', function() {
-                    currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-                    updateCarousel();
-                });
-            }
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+            });
 
-            // POPUP INTELIGENTE CON CONTROL DE SESIÓN (Evita repetición molesta)
+            // PARCHE DEL POPUP: CONTROL CON SESSIONSTORAGE
             const popupOverlay = document.getElementById('popupOverlay');
             const popupClose = document.getElementById('popupClose');
 
-            if (popupOverlay && !sessionStorage.getItem('popupMostrado')) {
+            // Solo si NO se ha mostrado en esta sesión del navegador, se activa tras 10 segundos
+            if (!sessionStorage.getItem('popupMostrado')) {
                 setTimeout(function() {
                     popupOverlay.classList.add('active');
-                    sessionStorage.setItem('popupMostrado', 'true'); // Bloquea futuros popups esta sesión
-                }, 10000); // Aparece a los 10 segundos
+                    sessionStorage.setItem('popupMostrado', 'true');
+                }, 10000);
             }
 
-            if(popupClose && popupOverlay) {
-                popupClose.addEventListener('click', function() {
+            popupClose.addEventListener('click', function() {
+                popupOverlay.classList.remove('active');
+            });
+
+            popupOverlay.addEventListener('click', function(e) {
+                if (e.target === popupOverlay) {
                     popupOverlay.classList.remove('active');
-                });
+                }
+            });
 
-                popupOverlay.addEventListener('click', function(e) {
-                    if (e.target === popupOverlay) {
-                        popupOverlay.classList.remove('active');
-                    }
-                });
-            }
-
-            // Smooth scroll para navegación
+            // Smooth scroll funcional
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
