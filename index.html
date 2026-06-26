@@ -6,6 +6,16 @@
     <title>Mundo Animal | Veterinaria en León - Cuidado Integral para Mascotas</title>
     <meta name="description" content="Veterinaria Mundo Animal en León. Servicios: guardería, cirugías, vacunas, peluquería. Productos para mascotas. Desde 1999 cuidando de tus amigos peludos.">
     
+    <!-- LINK AL MANIFIESTO PWA -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#F9B872">
+
+    <!-- Soporte para iOS / Safari PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mundo Animal">
+    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+
     <!-- Meta redes sociales -->
     <meta property="og:title" content="Mundo Animal | Veterinaria Especializada">
     <meta property="og:description" content="Cuidado integral para perros y gatos. Servicios veterinarios, guardería y productos de calidad.">
@@ -105,7 +115,7 @@
             width: 100%;
         }
 
-        /* Hero Section - Altura elástica corregida */
+        /* Hero Section */
         .hero {
             min-height: 85vh;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
@@ -151,6 +161,31 @@
             background: var(--accent);
             color: var(--text);
             transform: translateY(-3px);
+        }
+
+        /* Botón de instalación personalizado flotante */
+        #btnInstalar {
+            display: none;
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 1001;
+            background: #F9B872;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        #btnInstalar:hover {
+            background: var(--accent);
+            color: var(--text);
+            transform: scale(1.05);
         }
 
         /* Sections General */
@@ -213,7 +248,6 @@
             transform: translateY(-10px);
         }
 
-        /* Protección para que la foto de la veterinaria no se estire */
         .about-image img {
             width: 100%;
             height: 320px;
@@ -280,7 +314,6 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        /* Arreglo definitivo para las imágenes de los productos */
         .product-card img {
             width: 100%;
             height: 220px;
@@ -386,7 +419,7 @@
             color: white;
         }
 
-        /* Reglas para alternar botones del calendario (PC vs Móvil) */
+        /* Reglas PC vs Móvil */
         .only-pc { display: none !important; }
         .only-mobile { display: block !important; }
 
@@ -556,6 +589,12 @@
             .carousel-item {
                 height: 300px;
             }
+            
+            #btnInstalar {
+                top: auto;
+                bottom: 110px;
+                right: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -566,6 +605,9 @@
     </style>
 </head>
 <body>
+    <!-- BOTÓN DE INSTALACIÓN PERSONALIZADO -->
+    <button id="btnInstalar">📲 Instalar App</button>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -707,7 +749,7 @@
         </div>
     </section>
 
-    <!-- Google Calendar Booking Section (Nueva ubicación Limpia y Ordenada) -->
+    <!-- Google Calendar Booking Section -->
     <section id="citas" class="section" style="background: #fdfdfd;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 40px;">
@@ -716,10 +758,7 @@
             </div>
             
             <div style="text-align: center; margin-top: 20px;">
-                
-                <!-- COMPORTAMIENTO PC: Carga la ventana emergente elegante -->
                 <div class="only-pc">
-                    <!-- Google Calendar Appointment Scheduling begin -->
                     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
                     <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
                     <script>
@@ -735,10 +774,8 @@
                       });
                     })();
                     </script>
-                    <!-- end Google Calendar Appointment Scheduling -->
                 </div>
 
-                <!-- COMPORTAMIENTO MÓVIL: Evita que se rompa el diseño y manda a pantalla completa fluida -->
                 <div class="only-mobile">
                     <a href="https://calendar.app.google/rDDVrwUkSXm9sc2b7" 
                        target="_blank" 
@@ -747,7 +784,6 @@
                         📅 Programar una cita
                     </a>
                 </div>
-
             </div>
         </div>
     </section>
@@ -880,9 +916,49 @@
         </div>
     </div>
 
+    <!-- SCRIPT GLOBAL UNIFICADO -->
     <script>
-        // Carrusel
+        // 1. REGISTRO DEL SERVICE WORKER
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker activo exitosamente:', reg.scope))
+                    .catch(err => console.error('Error al registrar el Service Worker:', err));
+            });
+        }
+
+        // 2. CAPTURAR EVENTO DE INSTALACIÓN PERSONALIZADO (A2HS)
+        let deferredPrompt;
+        const btnInstalar = document.getElementById('btnInstalar');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Evita que Chrome muestre su barra automática molesta
+            e.preventDefault();
+            // Guarda el evento para detonarlo cuando den clic
+            deferredPrompt = e;
+            // Despierta nuestro botón de instalación
+            btnInstalar.style.display = 'block';
+        });
+
+        btnInstalar.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`El usuario decidió instalar: ${outcome}`);
+                deferredPrompt = null;
+                btnInstalar.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            btnInstalar.style.display = 'none';
+            deferredPrompt = null;
+            console.log('¡Mundo Animal PWA instalada de forma local!');
+        });
+
+        // 3. LOGICA DE INTERFAZ (CARRUSEL, POPUP SEGURO Y SCROLL)
         document.addEventListener('DOMContentLoaded', function() {
+            // Carrusel funcional
             const carouselInner = document.querySelector('.carousel-inner');
             const carouselItems = document.querySelectorAll('.carousel-item');
             const prevBtn = document.querySelector('.carousel-btn.prev');
@@ -903,13 +979,17 @@
                 updateCarousel();
             });
 
-            // Popup
+            // PARCHE DEL POPUP: CONTROL CON SESSIONSTORAGE
             const popupOverlay = document.getElementById('popupOverlay');
             const popupClose = document.getElementById('popupClose');
 
-            setTimeout(function() {
-                popupOverlay.classList.add('active');
-            }, 10000);
+            // Solo si NO se ha mostrado en esta sesión del navegador, se activa tras 10 segundos
+            if (!sessionStorage.getItem('popupMostrado')) {
+                setTimeout(function() {
+                    popupOverlay.classList.add('active');
+                    sessionStorage.setItem('popupMostrado', 'true');
+                }, 10000);
+            }
 
             popupClose.addEventListener('click', function() {
                 popupOverlay.classList.remove('active');
@@ -921,7 +1001,7 @@
                 }
             });
 
-            // Smooth scroll para navegación
+            // Smooth scroll funcional
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
