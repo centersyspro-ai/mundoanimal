@@ -6,6 +6,16 @@
     <title>Mundo Animal | Veterinaria en León - Cuidado Integral para Mascotas</title>
     <meta name="description" content="Veterinaria Mundo Animal en León. Servicios: guardería, cirugías, vacunas, peluquería. Productos para mascotas. Desde 1999 cuidando de tus amigos peludos.">
     
+    <!-- LINK AL MANIFIESTO PWA -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#F9B872">
+
+    <!-- Soporte para iOS / Safari PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mundo Animal">
+    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+
     <!-- Meta redes sociales -->
     <meta property="og:title" content="Mundo Animal | Veterinaria Especializada">
     <meta property="og:description" content="Cuidado integral para perros y gatos. Servicios veterinarios, guardería y productos de calidad.">
@@ -13,6 +23,8 @@
     
     <!-- Fuente Lato -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- El resto de tus estilos CSS se mantiene exactamente igual... -->
     
     <style>
         :root {
@@ -935,6 +947,17 @@
                 });
             });
         });
+    </script>
+
+    <!-- REGISTRO DEL SERVICE WORKER -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker activo exitosamente:', reg.scope))
+                    .catch(err => console.error('Error al registrar el Service Worker:', err));
+            });
+        }
     </script>
 </body>
 </html>
