@@ -605,6 +605,56 @@
     </style>
 </head>
 <body>
+
+    <!-- La imagen de inicio estilo AppCreator24 -->
+<div id="appcreator-splash">
+  <img src="assets/images/front.jpg" alt="Cargando app...">
+</div>
+
+<style>
+  #appcreator-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000; /* Color de fondo mientras carga la imagen */
+    z-index: 999999; /* Por encima de absolutamente todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Evita que el usuario toque cosas por error abajo */
+    transition: opacity 0.4s ease;
+  }
+
+  #appcreator-splash img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Hace el efecto exacto de AppCreator24 (llena la pantalla sin deformar) */
+    object-position: center; /* Centra la imagen para que el recorte sea parejo */
+  }
+
+  #appcreator-splash.fade-out {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  // Cuando la página web termine de cargar...
+  window.addEventListener('load', function() {
+    // Le damos 1.5 segundos de protagonismo a la pantalla de inicio (igual que en AppCreator24)
+    setTimeout(function() {
+      const splash = document.getElementById('appcreator-splash');
+      splash.classList.add('fade-out');
+      
+      // Borramos el elemento por completo después de la animación para no consumir memoria
+      setTimeout(function() {
+        splash.remove();
+      }, 400);
+    }, 1500);
+  });
+</script>
+
     <!-- BOTÓN DE INSTALACIÓN PERSONALIZADO -->
     <button id="btnInstalar">📲 Instalar App</button>
 
