@@ -759,21 +759,23 @@
             
             <div style="text-align: center; margin-top: 20px;">
                 <div class="only-pc">
-                    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-                    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Dcn9Po8pScPnq1MbqDa4cGYRegFbeA9WdS71_X4bb0NHUbKucwgjuzVvQWXiIfYv3dG0LtX71?gv=true',
-                          color: '#F9B872',
-                          label: 'Programar una cita',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
+                    <!-- Google Calendar Appointment Scheduling begin -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+<script>
+(function() {
+  var target = document.currentScript;
+  window.addEventListener('load', function() {
+    calendar.schedulingButton.load({
+      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2b4fRncndTmIAXXWFSE9Om0IlY4DHyr5Hf-3PiImcSHWsJM4xcqs-wCOAT60um6Brnb5I-MPCB?gv=true',
+      color: '#039BE5',
+      label: 'Programar una cita',
+      target,
+    });
+  });
+})();
+</script>
+<!-- end Google Calendar Appointment Scheduling -->
                 </div>
 
                 <div class="only-mobile">
